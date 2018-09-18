@@ -26,14 +26,6 @@ class CgemConverter:
         self.strGotoValue = hex(int(self.gotoValue))[2:]
         return self.strGotoValue
 
-# Function may be deprecated after things are working.
-
-    def highMidLow(self, gotoValue):
-        highByte = int (gotoValue  / 256 / 256)
-        midByte  = int ((gotoValue - (highByte  * 256 * 256)) / 256)
-        lowByte  = int (gotoValue  - (highByte  * 256 * 256) - (midByte  * 256))
-        return [highByte, midByte, lowByte]
-
 class Ra(CgemConverter):
     hr  = 0.0
     min = 0.0
@@ -56,7 +48,13 @@ class Dec(CgemConverter):
         
         return self.convertSeconds(self.decInSeconds)
 
+# This paradigm was provided by Zach as a way to test the individual
+# classes as a main program.
+
 if __name__ == '__main__':
+
+# Is there a better way to initialize the ra and dec values?
+    
     ra = Ra()
     dec = Dec()
     
@@ -68,7 +66,8 @@ if __name__ == '__main__':
     dec.min = input ('decMin : ')
     dec.sec = input ('decSec : ')
 
-    conversion = CgemConverter()
+    # Ask Zach why this line is failing:
+    # conversion = CgemConverter()
     
     print 'RA   hr min sec      : ', ra.hr,   ' ', ra.min,  ' ', ra.sec
     print 'Dec deg min sec      : ', dec.deg, ' ', dec.min, ' ', dec.sec
@@ -76,16 +75,6 @@ if __name__ == '__main__':
     print 'fullCircleSec        : ', CgemConverter.fullCircleSec
     print 'oneTwelthArcSeconds  : ', CgemConverter.oneTwelthArcSeconds
     print 'conversionFactor     : ', CgemConverter.conversionFactor
-#    print 'decInSeconds         : ', self.decInSeconds
-#    print 'raInSeconds          : ', self.raInSeconds
-#    print 'hex-int decGotoValue : ', hex(int(conversion.decGotoValue))
-#    print 'hex-int raGotValuie  : ', hex(int(conversion.raGotoValue))
-#    print 'hex decHighByte      : ', hex(conversion.decHighByte)
-#    print 'hex decMidByte       : ', hex(conversion.decMidByte)
-#    print 'hex decLowByte       : ', hex(conversion.decLowByte)
-#    print 'hex raHighByte       : ', hex(conversion.raHighByte)
-#    print 'hex raMidByte        : ', hex(conversion.raMidByte)
-#    print 'hex raLowByte        : ', hex(conversion.raLowByte)
 
 # This fails if there is no serial device. Need someway to test without the
 # hardware being present. Until then I'll put a #@ in front of serial

@@ -4,8 +4,8 @@ import serial
 ra  = convertRaDecToCgemUnits.Ra()
 dec = convertRaDecToCgemUnits.Dec()
 
-ser = serial.Serial('/dev/ttyUSB0', timeout=1)
-print 'ser name : ', ser.name
+#@ ser = serial.Serial('/dev/ttyUSB0', timeout=1)
+#@ print 'ser name : ', ser.name
 
 loopControl = True
 
@@ -21,18 +21,20 @@ while loopControl:
     
         dec.deg = input ('decDeg : ')
         dec.min = input ('decMin : ')
+        
         dec.sec = input ('decSec : ')
 
         print 'ra  : ', ra.hr, ra.min, ra.sec
         print 'dec : ', dec.deg, dec.min, dec.sec
         print
 
-        print 'r'+ra.toCgem()+','+dec.toCgem()+'#'
-        ser.write ('r'+ra.toCgem()+','+dec.toCgem()+'#')
+        print 'r'+ra.toCgem()+','+dec.toCgem()
+        #@ ser.write ('r'+ra.toCgem()+','+dec.toCgem()+'#')
 
-        data = ser.read(50)
-        print 'data : ', data
+        #@ data = ser.read(50)
+        #@ print 'data : ', data
         print
         
 
+        
 
